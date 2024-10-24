@@ -1,0 +1,13 @@
+#PROBLEM 0001
+
+def problem0001(num):
+    multiples = []
+    for n in range(num):
+        #print(n)
+        if n%3 == 0:
+            multiples.append(n)
+        elif n%5 == 0:
+            multiples.append(n)
+    return(sum(multiples))
+
+print(problem0001(1000))
