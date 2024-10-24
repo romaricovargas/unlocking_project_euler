@@ -2,6 +2,8 @@
 Tackling the Thrilling Programming Challenges from the Project Euler Website
 https://projecteuler.net/
 
+Please refer to the individual files for my solutions. The table below outlines the problems I have solved, along with the corresponding run times for each solution.
+
 | Problem Number | Resoloved | Run time |
 | --- | --- | --- |
 | 0001 | Yes | 0.164 seconds |
