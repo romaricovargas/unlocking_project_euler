@@ -1,0 +1,13 @@
+# PROBLEM 0006
+
+def problem0006(sum_a=0, sum_b=0, i=0):
+    i += 1
+    sum_a += i**2
+    sum_b += i
+    if i < 100:
+        sum_a, sum_b = problem0006(sum_a, sum_b, i)
+    if i == 1:
+        return (sum_b**2 - sum_a)
+    return sum_a, sum_b
+
+print(problem0006())
