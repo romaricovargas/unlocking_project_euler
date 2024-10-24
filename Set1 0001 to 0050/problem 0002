@@ -1,0 +1,11 @@
+# PROBLEM 0002
+
+def problem0002(a=1, b=2, sum=2):
+    c = a + b
+    if c <= 4000000:
+        if c%2 == 0:
+            sum = sum + c
+        sum = problem0002(b, c, sum)
+    return(sum)
+
+print(problem0002())
