@@ -10,7 +10,7 @@ Please refer to the individual files for my solutions. The table below outlines 
 | 0002 | Yes | 0.148 seconds |
 | 0003 | | |
 | 0004 | | |
-| 0005 | | |
+| 0005 | Yes | 4.154 seconds |
 | 0006 | Yes | 0.166 seconds |
 | 0007 | | |
 | 0008 | | |
