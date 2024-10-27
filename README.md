@@ -1,5 +1,5 @@
 # unlocking_project_euler
-Tackling the Thrilling Programming Challenges from the Project Euler Website
+Tackling the thrilling programming challenges from the Project Euler website
 https://projecteuler.net/
 
 Please refer to the individual files for my solutions. The table below outlines the problems I have solved, along with the corresponding run times for each solution.
