@@ -16,7 +16,7 @@ Please refer to the individual files for my solutions. The table below outlines 
 | 0008 | | |
 | 0009 | Yes | 0.229 seconds |
 | 0010 | | |
-| 0011 | | |
+| 0011 | Yes | 0.181 seconds |
 | 0012 | | |
 | 0013 | | |
 | 0014 | | |

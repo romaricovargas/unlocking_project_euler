@@ -32,6 +32,7 @@ import os
 
 def problem0011():
 
+    # Import CSV to a list of integers
     csvloc = os.path.join('set1 0001 to 0050', 'problem 0011.csv')
     with open(csvloc, 'r') as csvfile:
         csv_reader = csv.reader(csvfile)
@@ -44,6 +45,36 @@ def problem0011():
                     r.append(int(col))
             n.append(r)
 
+    p_max = 0
+    
+    for y in range(len(n)):
+        for x in range(len(n[y])):
+            
+            # Horizontal product
+            if x + 3 < len(n[y]):
+                p_hor = n[y][x] * n[y][x+1] * n[y][x+2] * n[y][x+3]
+                if p_hor > p_max:
+                    p_max = p_hor
+
+                # Diagonal (right) product
+                if y + 3 < len(n):
+                    p_diag_r = n[y][x] * n[y+1][x+1] * n[y+2][x+2] * n[y+3][x+3]
+                    if p_diag_r > p_max:
+                        p_max = p_diag_r
+
+            # Vertical product
+            if y + 3 < len(n):
+                p_ver = n[y][x] * n[y+1][x] * n[y+2][x] * n[y+3][x]
+                if p_ver > p_max:
+                    p_max = p_ver
+
+                # Diagonal (left) product
+                if x >= 3:
+                    p_diag_l = n[y][x] * n[y+1][x-1] * n[y+2][x-2] * n[y+3][x-3]
+                    if p_diag_l > p_max:
+                        p_max = p_diag_l       
+
+    return p_max        
         
 
-problem0011()
+print(problem0011())
