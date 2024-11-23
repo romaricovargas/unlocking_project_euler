@@ -12,24 +12,33 @@ How many different ways can £2 be made using any number of coins?
 
 def problem_0031():
 
-    def distribute(d, c, m, i, u):
-        # d     denomination
-        # c     count in every denomination
-        # m     max count in every denomination
-        # i     index of current denomination
-        # u     undistributed money
-
-        if d[i] <= u:
-            c[i] = c[0] + 1
-            u = u - d[i]
+    def distribute(d, c, m, i, u, g, s, t):
+        # d = denomination
+        # c = count in every denomination
+        # m = max count in every denomination
+        # i = index of current denomination
+        # u = undistributed money
+        # g = goal amount
+        # s = sum of money
+        # t = number of combinations
             
-            print("denominations = ", d, " | counts = ", c,  " | maximum counts = ", m)
-            print("undistributed money = ", u, " | current denomination = ", d[i])
-            print('----------------------------------------')
+        print("denominations = ", d, " | counts = ", c,  " | maximum counts = ", m)
+        print("undistributed money = ", u, " | current denomination = ", d[i])
+        print('----------------------------------------')
 
+        if s == g:
+            t = t + 1
+            print(' t = ', t)
+        
+        else:          
 
+            if u >= d[i] and c[i] < m[i]:
+                c[i] = c[i] + 1
+                s = s + d[i]
+                u = u - d[i]
+                distribute(d, c, m, i, u, g, s, t)
 
-                
+             
 
 
 
@@ -39,8 +48,11 @@ def problem_0031():
     m = [1, 2]       # max count in every denomination
     i = 0            # index of current denomination
     u = 200          # undistributed money
+    g = 200          # goal amount
+    s = 0            # sum of money
+    t = 0            # number of combinations
 
-    distribute(d, c, m, i, u)
+    distribute(d, c, m, i, u, g, s, t)
 
 problem_0031()
 
