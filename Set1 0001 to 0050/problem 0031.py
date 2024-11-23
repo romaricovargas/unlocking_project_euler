@@ -13,46 +13,30 @@ How many different ways can £2 be made using any number of coins?
 def problem_0031():
 
     def distribute(d, c, m, i, u, g, s, t):
-        # d = denomination
-        # c = count in every denomination
-        # m = max count in every denomination
-        # i = index of current denomination
-        # u = undistributed money
-        # g = goal amount
-        # s = sum of money
-        # t = number of combinations
-            
-        print("denominations = ", d, " | counts = ", c,  " | maximum counts = ", m)
-        print("undistributed money = ", u, " | current denomination = ", d[i])
-        print('----------------------------------------')
 
-        if s == g:
-            t = t + 1
-            print(' t = ', t)
-        
-        else:          
+        if i < len(c)-1:
+            t = distribute(d, c.copy(), m, i+1, u, g, s, t)
 
-            if u >= d[i] and c[i] < m[i]:
-                c[i] = c[i] + 1
-                s = s + d[i]
-                u = u - d[i]
-                distribute(d, c, m, i, u, g, s, t)
+        if u >= d[i] and c[i] < m[i]:
+            c[i] = c[i] + 1
+            s = s + d[i]
+            u = u - d[i]
+            if s == g:
+                t = t + 1
+            t = distribute(d, c, m, i, u, g, s, t)
 
-             
-
-
-
+        return t
    
-    d = [200, 100]   # denomination
-    c = [0, 0]       # count in every denomination
-    m = [1, 2]       # max count in every denomination
-    i = 0            # index of current denomination
-    u = 200          # undistributed money
-    g = 200          # goal amount
-    s = 0            # sum of money
-    t = 0            # number of combinations
+    d = [200, 100, 50, 20, 10, 5, 2, 1]     # denomination
+    c = [0, 0, 0, 0, 0, 0, 0, 0]            # count in every denomination
+    m = [1, 2, 4, 10, 20, 40, 100, 200]     # max count in every denomination
+    i = 0                                   # index of current denomination
+    u = 200                                 # undistributed money
+    g = 200                                 # goal amount
+    s = 0                                   # sum of money
+    t = 0                                   # number of combinations
 
-    distribute(d, c, m, i, u, g, s, t)
+    return distribute(d, c, m, i, u, g, s, t)
 
-problem_0031()
+print(problem_0031())
 
