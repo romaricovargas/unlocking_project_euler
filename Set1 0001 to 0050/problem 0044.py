@@ -13,30 +13,59 @@ Find the pair of pentagonal numbers, P(j) and P(k) for which
 their sum and difference are pentagonal and D = |P(k) - P(j)| is minimised; 
 what is the value of D?
 
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+Formula for checking if a number is pentagonal:
+
+n = (sqrt((24*P)+1) + 1) / 6, if n is whole number then P is pentagonal
+
+source: https://en.wikipedia.org/wiki/Pentagonal_number
+
 '''
 
 from math import sqrt 
 
 def problem_0044(limit=1000):
     pentagonal = {1:1}   # dictionary of pentagonal numbers with initial first entry.
+    unpentagonal = []    # list of non-pentagonal numbers, to avoid redundant computation. 
     n = 2                # initial n
 
     def compute_pentagonal(x):
         return int(x*((3*x)-1)/2)
     
-    def check_pentagonal(y):
-        x = (sqrt((24*y)+1) + 1) / 6
-        return int(x) == x
+    def check_pentagonal(y, p, u):
+        # y is the number being tested if pentagonal
+        # p is the pentagonal dictionary
+        # u is the non-pentagonal list
+
+        if y in p.values():                 # Return True if y is already in pentagonal dict 
+            return True
+        elif y in u:                        # Return False if y is already in non-pentagonal list
+            return False
+        else:               
+            x = (sqrt((24*y)+1) + 1) / 6    # Use formula for checking if a number is pentagonal 
+            if int(x) == x:
+                p[x] = y                    # Store number in pentagonal dict ifpentagonal
+                return True
+            else:
+                u.append(y)                 # Store number in non-pentagonal list of non-pentagonal
+                return False
 
     while len(pentagonal) < limit:
         pentagonal[n] = compute_pentagonal(n)
         n += 1
 
-    for k, v in pentagonal.items():
-        print(k, " : ", v, check_pentagonal(v)) 
+    #for k, v in pentagonal.items():
+    #    print(k, " : ", v, check_pentagonal(v, pentagonal, unpentagonal)) 
 
-    print(7, check_pentagonal(7))
-    print(20, check_pentagonal(20))
+    #print(7, check_pentagonal(7, pentagonal, unpentagonal))
+    #print(20, check_pentagonal(20, pentagonal, unpentagonal))
+    #print(1002, check_pentagonal(1002, pentagonal, unpentagonal))
+    #print(146120415, check_pentagonal(146120415, pentagonal, unpentagonal))
+    #print(7, check_pentagonal(7, pentagonal, unpentagonal))
+    #print(20, check_pentagonal(20, pentagonal, unpentagonal))
+    #print(1002, check_pentagonal(1002, pentagonal, unpentagonal))
+    #print(146120415, check_pentagonal(146120415, pentagonal, unpentagonal))
 
 
-problem_0044(10000)
+problem_0044(200)
