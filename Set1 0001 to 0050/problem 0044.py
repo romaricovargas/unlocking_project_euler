@@ -15,19 +15,28 @@ what is the value of D?
 
 '''
 
+from math import sqrt 
+
 def problem_0044(limit=1000):
     pentagonal = {1:1}   # dictionary of pentagonal numbers with initial first entry.
-    n = 2                # current n
+    n = 2                # initial n
 
     def compute_pentagonal(x):
         return int(x*((3*x)-1)/2)
+    
+    def check_pentagonal(y):
+        x = (sqrt((24*y)+1) + 1) / 6
+        return int(x) == x
 
     while len(pentagonal) < limit:
         pentagonal[n] = compute_pentagonal(n)
         n += 1
 
     for k, v in pentagonal.items():
-        print(k, " : ", v) 
+        print(k, " : ", v, check_pentagonal(v)) 
+
+    print(7, check_pentagonal(7))
+    print(20, check_pentagonal(20))
 
 
-problem_0044(100)
+problem_0044(10000)
