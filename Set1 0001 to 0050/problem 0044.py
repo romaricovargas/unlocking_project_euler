@@ -21,86 +21,58 @@ n = (sqrt((24*P)+1) + 1) / 6, if n is whole number then P is pentagonal
 
 source: https://en.wikipedia.org/wiki/Pentagonal_number
 
+~ ~ ~ ~ ~ ~ ~ ~ ~ ~
+
+This is the algorithm I formulated. 
+There are 2 checkings in every iteration which made the process 2x faster.
+
+ - Orderly generate pairs of pentagonals
+ - Check if the sum of 2 pentagonals P(m) and P(n) is also pentagonal P(s)
+ - If P(s) is pentagonal, then P(s) - P(n) = P(m), the difference is pentagonal
+ - If P(s) is pentagonal, then P(s) - P(m) = P(n), the difference is pentagonal
+ - If the sum of P(s) and P(n) is pentagonal P(s1), then P(s) and P(n) is the desired pair
+ - If the sum of P(s) and P(m) is pentagonal P(s2), then P(s) and P(m) is the desired pair
+
 '''
 
 from math import sqrt 
 
-def problem_0044(limit=1000):
-    pentagonal = {1:1}     # dictionary of pentagonal numbers with initial first entry. ex: {1:1, 2:5, 3:12}
-    unpentagonal = []      # list of non-pentagonal numbers, to avoid redundant computation. 
-    n = 2                  # initial n
-    answer_found = False   # Flag if answer was found
+def problem_0044(limit=2000):
+    pentagonal = {1:1}              # dictionary of pentagonal numbers {n1:P1, n2:P2}, with initial first entry. ex: {1:1, 2:5, 3:12}
+    n = 2                           # initial n
+    answer_found = False            # flag to indicate if answer is found
 
     def compute_pentagonal(x):
         return int(x*((3*x)-1)/2)
     
-    def check_pentagonal(y, p, u):
-        # y is the number being tested if pentagonal
-        # p is the pentagonal dictionary
-        # u is the non-pentagonal list
-
-        if y in p.values():                 # Return True if y is already in pentagonal dict 
+    def check_pentagonal(y):                 # y is the number being tested if pentagonal
+        z = (sqrt((24*y)+1) + 1) / 6         # Use formula for checking if a number is pentagonal 
+        if int(z) == z:
             return True
-        elif y in u:                        # Return False if y is already in non-pentagonal list
-            return False
-        else:               
-            x = (sqrt((24*y)+1) + 1) / 6    # Use formula for checking if a number is pentagonal 
-            if int(x) == x:
-                p[x] = y                    # Store number in pentagonal dict ifpentagonal
-                return True
-            else:
-                u.append(y)                 # Store number in non-pentagonal list of non-pentagonal
-                return False
+        return False
 
-    while len(pentagonal) < limit and not answer_found:
-        pentagonal[n] = compute_pentagonal(n)
+    while len(pentagonal) < limit and not answer_found:      # iterate from n=2 until answer is found or limit is reached
+        pentagonal[n] = compute_pentagonal(n)                # compute pentagonal P(n)      
 
-        #for m in range(n-1, 0, -1):
-        #    if check_pentagonal((pentagonal[n] + pentagonal[m]), pentagonal, unpentagonal):
-        #        print("sum found!", pentagonal[n], pentagonal[m])
-        #    if check_pentagonal((pentagonal[n] - pentagonal[m]), pentagonal, unpentagonal):
-        #        print("dif found!", pentagonal[n], pentagonal[m])
-        #    if check_pentagonal((pentagonal[n] + pentagonal[m]), pentagonal, unpentagonal):
-        #        if check_pentagonal((pentagonal[n] - pentagonal[m]), pentagonal, unpentagonal):
-        #            print("both found!", pentagonal[n], pentagonal[m], '<=========================================')
-        #            answer_found = True
-            #if check_pentagonal((pentagonal[n] + pentagonal[m]), pentagonal, unpentagonal):
-            #    print("sum found!", pentagonal[n], pentagonal[m])
-            #if check_pentagonal((pentagonal[n] - pentagonal[m]), pentagonal, unpentagonal):
-            #    print("dif found!", pentagonal[n], pentagonal[m])
-                #if check_pentagonal((pentagonal[n] - pentagonal[m]), pentagonal, unpentagonal):
-                #    print(pentagonal[n] - pentagonal[m])
-                #    answer_found = True
-
+        for m in range(n-1, 0, -1):                          # iterate to all numbers lower than n from n-1 to 1, designated as m
+            Ps = pentagonal[n] + pentagonal[m]               # get sum of pentagonals P(n) and P(m)
+            if check_pentagonal(Ps):                         # check if sum is pentagonal P(s)
+                Ps1 = pentagonal[n] + Ps                     # get sum1 of pentagonals P(s) and P(n)
+                Ps2 = pentagonal[m] + Ps                     # get sum2 of pentagonals P(s) and P(m)
+                if check_pentagonal(Ps1):                    # check if sum1 is pentagonal P(s1)
+                    print("answer found")
+                    print("n:     ", n)
+                    print("P(n):  ", pentagonal[n])
+                    print("P(s):  ", Ps)
+                    print("diff:  ", abs(pentagonal[n]-Ps))
+                    answer_found = True                      # set flag to true
+                if check_pentagonal(Ps2):                    # check if sum2 is pentagonal P(s2)
+                    print("answer found")
+                    print("m:     ", m)
+                    print("P(m):  ", pentagonal[m])
+                    print("P(s):  ", Ps)
+                    print("diff:  ", abs(pentagonal[m]-Ps))
+                    answer_found = True                      # set flag to true
         n += 1
 
-    #for k, v in pentagonal.items():
-    #    print(k, " : ", v, check_pentagonal(v, pentagonal, unpentagonal)) 
-
-
-    for k, v in pentagonal.copy().items():
-        for i in range(k-1, 0, -1):
-            j = v + pentagonal[i]
-            if check_pentagonal(j, pentagonal, unpentagonal):
-                #print(v, pentagonal[i], j)
-                k1 = v + j
-                k2 = pentagonal[i] + j
-                if check_pentagonal(k1, pentagonal, unpentagonal):
-                    print("k1 found", v, j, "sum =", k1, "dif =", v-j)
-                if check_pentagonal(k2, pentagonal, unpentagonal):
-                    print("k2 found", pentagonal[i] , j, "sum =", k2, "dif =", pentagonal[i] -j)
-
-
-
-
-    #print(7, check_pentagonal(7, pentagonal, unpentagonal))
-    #print(20, check_pentagonal(20, pentagonal, unpentagonal))
-    #print(1002, check_pentagonal(1002, pentagonal, unpentagonal))
-    #print(146120415, check_pentagonal(146120415, pentagonal, unpentagonal))
-    #print(7, check_pentagonal(7, pentagonal, unpentagonal))
-    #print(20, check_pentagonal(20, pentagonal, unpentagonal))
-    #print(1002, check_pentagonal(1002, pentagonal, unpentagonal))
-    #print(146120415, check_pentagonal(146120415, pentagonal, unpentagonal))
-
-
-problem_0044(1000)
+problem_0044(20000)

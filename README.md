@@ -49,7 +49,7 @@ Please refer to the individual files for my solutions. The table below outlines 
 | 0041 | | | |
 | 0042 | | | |
 | 0043 | | | |
-| 0044 | | | |
+| 0044 | Yes| 0.838 | Formulated an algorithm with double checking per iteration |
 | 0045 | | | |
 | 0046 | | | |
 | 0047 | | | |
