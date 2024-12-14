@@ -12,7 +12,7 @@ Please refer to the individual files for my solutions. The table below outlines 
 | 0004 | | | |
 | 0005 | Yes | 4.154 seconds | |
 | 0006 | Yes | 0.166 seconds | |
-| 0007 | | | |
+| 0007 | Yes | 3.169 seconds | Created a separate prime number checker function |
 | 0008 | | | |
 | 0009 | Yes | 0.229 seconds | |
 | 0010 | | | |
