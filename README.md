@@ -24,7 +24,7 @@ Please refer to the individual files for my solutions. The table below outlines 
 | 0016 | | | |
 | 0017 | | | |
 | 0018 | | | |
-| 0019 | | | |
+| 0019 | Yes| 0.301 seconds | |
 | 0020 | | | |
 | 0021 | | | |
 | 0022 | | | |
