@@ -30,7 +30,7 @@ Please refer to the individual files for my solutions. The table below outlines 
 | 0022 | | | |
 | 0023 | | | |
 | 0024 | | | |
-| 0025 | | | |
+| 0025 | Yes | 0.162 seconds | Invoked recursive iterations several times|
 | 0026 | | | |
 | 0027 | | | |
 | 0028 | | | |
