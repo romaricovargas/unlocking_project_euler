@@ -36,7 +36,7 @@ Please refer to the individual files for my solutions. The table below outlines 
 | 0028 | | | |
 | 0029 | | | |
 | 0030 | | | |
-| 0031 | Yes | 0.893 | Used recursive function |
+| 0031 | Yes | 0.893 seconds | Used recursive function |
 | 0032 | | | |
 | 0033 | | | |
 | 0034 | | | |
